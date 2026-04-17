@@ -17,7 +17,7 @@ The dataset used in this project comes from the MovieLens dataset created by the
 
 # Data Source
 
-The dataset used in this project is the MovieLens dataset from the GroupLens research group (<https://grouplens.org/datasets/movielens/>). It contains user ratings, movie information, and tags. The dataset includes four main files: ratings.csv, movies.csv, tags.csv, and links.csv.
+The dataset used in this project is the MovieLens dataset from the GroupLens research group (<https://grouplens.org/datasets/movielens/>). The dataset includes 100,836 ratings and 3,683 tag applications across 9,742 movies from 610 users, collected between 1996 and 2018. All users in the dataset have rated at least 20 movies, and no demographic information is provided, meaning users are identified only by an ID. It contains user ratings, movie information, and tags. The dataset includes four main files: ratings.csv, movies.csv, tags.csv, and links.csv.
 
 # Codebook
 
