@@ -1,0 +1,93 @@
+---
+title: "movie recommendation system"
+author: "OUR NAMES HERE"
+date: "2026-04-17"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Introduction
+
+Recommendation systems are used in many popular apps and websites to help users find content they may like. Movie recommendation systems are especially useful because they help users sort through a large number of movies and find ones that match their interests.
+
+In this project, we use the MovieLens dataset, which contains user ratings, movie information, and tags, to study patterns in movie preferences. The main goal of this project is to build a model that can predict how a user would rate a movie and then use those predictions to recommend movies. In addition to prediction, we also want to better understand the data and compare different modeling approaches.
+
+The dataset used in this project comes from the MovieLens dataset created by the GroupLens research group. It includes several files such as `ratings.csv`, `movies.csv`, `tags.csv`, and `links.csv`. These files contain information about user ratings, movie titles, genres, tags, and external movie identifiers. The dataset contains about 100,836 ratings across 9,742 movies from 610 users. Since the data comes in multiple files, an important first step is to load, clean, and merge them into a form that can be used for analysis.
+
+# Data Source
+
+The dataset used in this project is the MovieLens dataset from the GroupLens research group (<https://grouplens.org/datasets/movielens/>). It contains user ratings, movie information, and tags. The dataset includes four main files: ratings.csv, movies.csv, tags.csv, and links.csv.
+
+# Codebook
+
+**-userId**: unique ID for each user
+
+**-movieId**: unique ID for each movie
+
+**-rating**: user rating (0.5 to 5.0)
+
+**-timestamp**: time the rating was given
+
+**-title**: movie name
+
+**-genres**: categories of the movie
+
+**-tag**: user-added label for a movie
+
+# Project Goal
+
+The goal of this project is to build a model that predicts how a user would rate a movie. Based on these predictions, we aim to recommend movies to users. In addition, we will compare different models to determine which performs best and explore patterns in user preferences.
+
+# Exploring and Tidying the Raw Data
+
+We begin by loading the four datasets provided in the MovieLens data. These include user ratings, movie information, tags, and external links.
+
+```{r}
+library(tidyverse)
+ratings <- read_csv("~/Downloads/ml-latest-small/ratings.csv")
+movies  <- read_csv("~/Downloads/ml-latest-small/movies.csv")
+tags    <- read_csv("~/Downloads/ml-latest-small/tags.csv")
+links   <- read_csv("~/Downloads/ml-latest-small/links.csv")
+
+glimpse(ratings)
+glimpse(movies)
+glimpse(tags)
+glimpse(links)
+```
+
+Before merging the data, we check for any missing values and duplicate rows to make sure the datasets are clean.
+
+```{r}
+colSums(is.na(ratings))
+colSums(is.na(movies))
+colSums(is.na(tags))
+colSums(is.na(links))
+
+sum(duplicated(ratings))
+sum(duplicated(movies))
+sum(duplicated(tags))
+sum(duplicated(links))
+```
+
+Before merging the datasets, we checked for missing values and duplicate rows to make sure the data was clean. The results show that most variables do not have missing values. However, the tmdbId variable in the links dataset has a small number of missing values. Since this variable is not essential for our main analysis, it will not significantly affect our results. In addition, no duplicate rows were found in the datasets. Overall, the data is already well-structured and requires minimal cleaning before merging.
+
+#### Merging the Data
+
+Since the data is split across multiple files, we merge them into one dataset using the `movieId` variable. We first join the ratings and movies datasets to connect user ratings with movie titles and genres.
+
+```{r}
+movie_data <- ratings %>%
+  left_join(movies, by = "movieId")
+```
+
+We then add additional information from the links dataset.
+
+```{r}
+movie_data <- movie_data %>%
+  left_join(links, by = "movieId")
+```
+
+The tags dataset was not included in the main merged dataset because not all movies have tags, and including it would create duplicate rows. It may be used later if needed for additional feature engineering.
+
+After merging the datasets, we now have a complete dataset that includes user ratings along with movie titles, genres, and additional information. The data has been checked for missing values and duplicates, and no major issues were found. The tags dataset was not included at this stage to avoid creating duplicate rows, since not all movies have tags. Overall, the dataset is now clean and ready for further analysis. In the next section, we will explore the data in more detail using summary statistics and visualizations to better understand patterns in user ratings and movie characteristics.
