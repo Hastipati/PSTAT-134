@@ -1,0 +1,41 @@
+---
+title: "data memo"
+author: "group 11"
+format: pdf
+editor: visual
+---
+
+# Movie Recommendation System
+
+## **Overview of the Dataset**
+
+For this project, we are using the MovieLens dataset, which contains user ratings and interactions with movies and is commonly used for building recommendation systems. The dataset was obtained from the GroupLens research group (<https://grouplens.org/datasets/movielens/>) and includes several files such as `ratings.csv`, `movies.csv`, `tags.csv`, and `links.csv`. The `ratings.csv` file contains user ratings for movies, `movies.csv` provides movie titles and genres, `tags.csv` includes user-generated tags describing movies, and `links.csv` connects movies to external databases like IMDb.
+
+The dataset contains approximately 100,836 ratings across 9,742 movies from 610 users . The main variables we will work with include userId and movieId as categorical identifiers, rating as a numerical variable ranging from 0.5 to 5.0, timestamp as a time-based variable, genres as categorical data, and tags as text data. Since this dataset is well-structured, it contains little to no traditional missing data. However, it is sparse, meaning that most users have only rated a small subset of movies. Any inconsistencies or missing entries will be handled through filtering and standard preprocessing techniques. These files will be merged using the movieId variable to create a single dataset for analysis.
+
+## 
+**Overview of the Research Questions**
+
+The main goal of this project is to build a recommendation system that predicts how a user would rate a movie and then uses those predictions to suggest movies. The primary response variable in this analysis will be the user’s rating. We are interested in understanding whether it is possible to accurately predict ratings based on available information and what patterns exist in user preferences across different types of movies.
+
+The predictors will include user Id, movie Id, and movie-related features such as genres, with the possibility of incorporating tags or engineered features if useful. These variables are expected to capture both user behavior and movie characteristics. The goal of this project is primarily predictive, since we aim to generate accurate recommendations, but it also has a descriptive component as we explore trends and relationships within the data. We will also compare different models to see which one performs best.
+
+## **Proposed Project Timeline**
+
+**Week 1-2:** Finalize dataset and complete data memo
+
+**Week 3:** Load and clean the dataset, including merging the different files and preparing the data for analysis
+
+**Week 4:** Perform exploratory data analysis (EDA)
+
+**Week 5:** Feature engineering and preprocessing
+
+**Week 6:** Build a simple baseline model
+
+**Week 7:** Train more advanced models
+
+**Week 8:** Tune and evaluate models
+
+**Week 9:** Compare results and finalize analysis
+
+**Week 10:** Prepare final report and presentation
